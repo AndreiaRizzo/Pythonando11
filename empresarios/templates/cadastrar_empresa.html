@@ -4,19 +4,21 @@
    <link rel="stylesheet" href="{% static 'usuarios/css/usuarios.css' %}">
 {% endblock 'head' %}
 {% block 'body' %}
+    {% include "partials/barra_navegacao.html" %}
    <div class="container">
+        
        <br>
        <br>
-       {% if messages %}
-           {% for message in messages %}
+        {% if messages %}
+            {% for message in messages %}
                <section class="alert {{message.tags}}">
                    {{message}}
                </section>
-           {% endfor %}
-       {% endif %}
+            {% endfor %}
+        {% endif %}
        <div class="row">
            <div class="col-md">
-               <form action="" method="">
+                <form action="{% url 'cadastrar_empresa' %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
                 <label>Nome</label>
                 <input type="text" name="nome" placeholder="Digite o nome da sua empresa ..." class="form-control">
                 <br>
@@ -28,7 +30,10 @@
                 <br>
                 <label>A quanto tempo a startup existe ?</label>
                 <select name="tempo_existencia" class="form-select">
-                    <option value="">T 1</option>
+
+                    {% for te in tempo_existencia %}
+                    <option value="{{te.0}}">{{te.1}}</option>
+                    {% endfor %}
                 </select>
                 <br>
                 <label>Descreva a sua empresa</label>
@@ -57,12 +62,14 @@
                 <br>
                 <label>Qual área sua startup está inseria ?</label>
                 <select name="area" class="form-select">
-                    <option value="">Area 1</option>
+                    {% for area in areas %}
+                    <option value="{{area.0}}">{{area.1}}</option>
+                    {% endfor %}
                 </select>
                 <br>
                 <label>Qual seu público alvo</label>
                 <select name="publico_alvo" class="form-select">
-                    <option value="BTC">BTC</option>
+                    <option value="B2C">B2C</option>
                     <option value="B2B">B2B</option>
                 </select>
                 <br>
