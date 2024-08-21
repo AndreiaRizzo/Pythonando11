@@ -20,7 +20,7 @@
                    {% endfor %}
                {% endif %}
                <br>
-               <form action="{% url 'logar' %}" method="POST">{% crsf_token %}
+               <form action="{% url 'logar' %}" method="POST">
                    <label>Username</label>
                    <input type="text" class="form-control input-pers" name="username" placeholder="Digite seu username">
                    <br>
